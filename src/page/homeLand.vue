@@ -5,7 +5,8 @@
 </template>
 
 <script>
-//import BDD from '../db'
+import BDD from '../db'
+import { onMounted } from 'vue'
 
 import RestaurantRow from '../components/RestaurantRow.vue'
 
@@ -15,6 +16,7 @@ export default {
       RestaurantRow
     },
     setup() {
+      
       class Restaurant {
         constructor (name, note, image, drive_time) {
           this.name = name
@@ -24,8 +26,20 @@ export default {
         }
       }
 
-      var resto = new Restaurant('Delicious', 10, 'img', '30 mm')
-      console.log(resto)
+      let dataRestaurant = []
+  
+      const makeDataRestaurant = () => {
+        let three_restaurants = []
+        for (const restaurant of BDD) {
+          const new_restaurant = new Restaurant(restaurant.name, restaurant.note, restaurant.image, restaurant.drive_time)
+          three_restaurants.push(new_restaurant)
+          if (three_restaurants.length == 3) {
+            dataRestaurant.push(three_restaurants)
+            three_restaurants = []
+          }
+        }
+      }
+      onMounted(makeDataRestaurant)
     }
 }
 </script>
