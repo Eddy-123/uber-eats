@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <RestaurantRow v-for="(row, index) in 6" :key="index"/>   
+    <HomeLand/>
   </div>
 </template>
 
 <script>
-import RestaurantRow from './components/RestaurantRow.vue'
+import HomeLand from './page/homeLand.vue'
 
 export default {
   name: 'App',
   components: {
-    RestaurantRow,    
+    HomeLand    
   }
 }
 </script>
